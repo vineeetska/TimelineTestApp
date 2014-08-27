@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity implements ICallback{
 			@Override
 			public void onRefresh() {
 				// TODO Auto-generated method stub
+				registerAvatarReceiver(true);
 				getTimelineData(false);
 			}
 		});
