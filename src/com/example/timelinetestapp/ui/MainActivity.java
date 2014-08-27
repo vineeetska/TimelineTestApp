@@ -1,6 +1,7 @@
 package com.example.timelinetestapp.ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -84,6 +85,9 @@ public class MainActivity extends ActionBarActivity implements ICallback{
 	}
 
 	private void setAdapter(){
+		if (mTimelineData != null && mTimelineData.size() > 0)
+			Collections.sort(mTimelineData, Collections.reverseOrder());
+		
 		if (mAdapter == null){
 			mAdapter = new TimelineListAdapter(getApplicationContext(), mTimelineData);
 			mListView.setAdapter(mAdapter);
@@ -146,4 +150,5 @@ public class MainActivity extends ActionBarActivity implements ICallback{
 		mListView.resetHeader();
 		mListView.setEmptyView(memptyView);
 	}
+	
 }

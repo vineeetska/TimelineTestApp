@@ -57,6 +57,7 @@ public class TimelineListAdapter extends BaseAdapter{
             holder.avatar = (ImageView)convertView.findViewById(R.id.avatarPic);
             holder.posterName = (TextView)convertView.findViewById(R.id.posterName);
             holder.post = (TextView)convertView.findViewById(R.id.posterDesc);
+            holder.time = (TextView)convertView.findViewById(R.id.time);
             convertView.setTag(holder);
         }
         else{
@@ -75,7 +76,7 @@ public class TimelineListAdapter extends BaseAdapter{
         
         holder.posterName.setText(getItem(position).getUser().getUsername());
         holder.post.setText(getItem(position).getPostText());
-        
+        holder.time.setText(getItem(position).getDateTime());
 		return convertView;
 	}
 	
@@ -83,6 +84,7 @@ public class TimelineListAdapter extends BaseAdapter{
 		ImageView avatar;
 		TextView posterName;
 		TextView post;
+		TextView time;
 	}
 
 	public void setListData(ArrayList<TimelineModel> listData) {

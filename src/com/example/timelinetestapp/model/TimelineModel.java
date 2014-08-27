@@ -1,13 +1,18 @@
 package com.example.timelinetestapp.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TimelineModel implements Parcelable{
+public class TimelineModel implements Parcelable, Comparable<TimelineModel>{
 
 	private String id = "";
 	private String postText = "";
 	private String createdAt = "";
+	private String dateTime = "";
 	private User user = new User();
 	
 	public TimelineModel() {
@@ -19,6 +24,7 @@ public class TimelineModel implements Parcelable{
 		id = in.readString();
 		postText = in.readString();
 		createdAt = in.readString();
+		dateTime = in.readString();
 		user = new User(in);
 	}
 	
@@ -39,7 +45,13 @@ public class TimelineModel implements Parcelable{
 	}
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
+		dateTime = createdAt.substring(0, createdAt.indexOf("T")) + " " + createdAt.substring(createdAt.indexOf("T") + 1, createdAt.indexOf("Z"));
 	}
+	
+	public String getDateTime() {
+		return dateTime;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -57,6 +69,7 @@ public class TimelineModel implements Parcelable{
 		dest.writeString(id);
 		dest.writeString(postText);
 		dest.writeString(createdAt);
+		dest.writeString(dateTime);
 		dest.writeString(user.getId());
 		dest.writeString(user.getUsername());
 		dest.writeString(user.getAvatarUrl());
@@ -79,5 +92,11 @@ public class TimelineModel implements Parcelable{
 			return new TimelineModel(source);
 		}
 	};
+
+	@Override
+	public int compareTo(TimelineModel another) {
+		// TODO Auto-generated method stub
+		return getDateTime().compareTo(another.getDateTime());
+	}
 	
 }
